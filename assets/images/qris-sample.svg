@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" width="300" height="300">
+  <rect width="300" height="300" fill="#ffffff" rx="16"/>
+  <!-- Header -->
+  <rect x="20" y="15" width="260" height="40" fill="#1A1A2E" rx="8"/>
+  <text x="150" y="42" font-family="'Plus Jakarta Sans', Arial, sans-serif" font-weight="bold" font-size="18" fill="#00D4AA" text-anchor="middle">QRIS STANDAR NASIONAL</text>
+  <!-- Border -->
+  <rect x="30" y="70" width="240" height="185" fill="none" stroke="#6C63FF" stroke-width="2" rx="10"/>
+  <!-- QR Pattern Mockup -->
+  <!-- Corner 1 -->
+  <rect x="45" y="85" width="50" height="50" fill="#1A1A2E" rx="4"/>
+  <rect x="55" y="95" width="30" height="30" fill="#ffffff"/>
+  <rect x="63" y="103" width="14" height="14" fill="#6C63FF"/>
+  <!-- Corner 2 -->
+  <rect x="205" y="85" width="50" height="50" fill="#1A1A2E" rx="4"/>
+  <rect x="215" y="95" width="30" height="30" fill="#ffffff"/>
+  <rect x="223" y="103" width="14" height="14" fill="#6C63FF"/>
+  <!-- Corner 3 -->
+  <rect x="45" y="190" width="50" height="50" fill="#1A1A2E" rx="4"/>
+  <rect x="55" y="200" width="30" height="30" fill="#ffffff"/>
+  <rect x="63" y="208" width="14" height="14" fill="#6C63FF"/>
+  <!-- Dots / Grid -->
+  <rect x="110" y="85" width="14" height="14" fill="#1A1A2E"/>
+  <rect x="135" y="85" width="14" height="14" fill="#6C63FF"/>
+  <rect x="160" y="85" width="20" height="14" fill="#1A1A2E"/>
+  <rect x="110" y="110" width="20" height="14" fill="#6C63FF"/>
+  <rect x="140" y="110" width="35" height="14" fill="#1A1A2E"/>
+  <rect x="110" y="135" width="80" height="30" fill="#1A1A2E" rx="4"/>
+  <text x="150" y="156" font-family="'Plus Jakarta Sans', Arial, sans-serif" font-weight="bold" font-size="12" fill="#00D4AA" text-anchor="middle">EDUMARKET</text>
+  <rect x="45" y="150" width="20" height="20" fill="#6C63FF"/>
+  <rect x="75" y="150" width="20" height="20" fill="#1A1A2E"/>
+  <rect x="205" y="150" width="20" height="20" fill="#1A1A2E"/>
+  <rect x="235" y="150" width="20" height="20" fill="#6C63FF"/>
+  <rect x="110" y="180" width="20" height="20" fill="#6C63FF"/>
+  <rect x="140" y="180" width="40" height="20" fill="#1A1A2E"/>
+  <rect x="190" y="180" width="20" height="20" fill="#6C63FF"/>
+  <rect x="220" y="180" width="35" height="20" fill="#1A1A2E"/>
+  <rect x="110" y="210" width="40" height="30" fill="#1A1A2E"/>
+  <rect x="160" y="210" width="45" height="30" fill="#6C63FF"/>
+  <rect x="215" y="210" width="40" height="30" fill="#1A1A2E"/>
+  <!-- Footer text -->
+  <text x="150" y="278" font-family="'Plus Jakarta Sans', Arial, sans-serif" font-weight="600" font-size="12" fill="#6C757D" text-anchor="middle">NMID: ID1020261103001 - EduMarket Official</text>
+</svg>

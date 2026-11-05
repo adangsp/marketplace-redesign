@@ -1,0 +1,77 @@
+version: '3.8'
+
+services:
+  # 1. PHP-FPM Application Service
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: edumarket_app
+    restart: unless-stopped
+    environment:
+      DB_HOST: db
+      DB_NAME: ${DB_NAME:-marketplace_db}
+      DB_USER: ${DB_USER:-edumarket_user}
+      DB_PASS: ${DB_PASS:-secret123!}
+      WAHA_URL: http://waha:3000
+    volumes:
+      - uploads_data:/var/www/html/uploads
+    networks:
+      - edumarket_net
+    depends_on:
+      - db
+
+  # 2. Nginx Web Server
+  web:
+    image: nginx:alpine
+    container_name: edumarket_web
+    restart: unless-stopped
+    ports:
+      - "${HTTP_PORT:-80}:80"
+    volumes:
+      - ./:/var/www/html:ro
+      - uploads_data:/var/www/html/uploads
+      - ./deploy/docker/nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    networks:
+      - edumarket_net
+    depends_on:
+      - app
+
+  # 3. MySQL Database
+  db:
+    image: mysql:8.0
+    container_name: edumarket_db
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASS:-rootpass123!}
+      MYSQL_DATABASE: ${DB_NAME:-marketplace_db}
+      MYSQL_USER: ${DB_USER:-edumarket_user}
+      MYSQL_PASSWORD: ${DB_PASS:-secret123!}
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./database/marketplace.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    networks:
+      - edumarket_net
+
+  # 4. WAHA (WhatsApp HTTP API) Gateway
+  waha:
+    image: devlikeapro/waha
+    container_name: edumarket_waha
+    restart: unless-stopped
+    ports:
+      - "${WAHA_PORT:-3000}:3000"
+    environment:
+      WHATSAPP_DEFAULT_ENGINE: WEBJS
+    volumes:
+      - waha_data:/app/.wwebjs_auth
+    networks:
+      - edumarket_net
+
+networks:
+  edumarket_net:
+    driver: bridge
+
+volumes:
+  db_data:
+  waha_data:
+  uploads_data:

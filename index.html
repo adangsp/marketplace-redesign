@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="EduMarket - Katalog aplikasi sekolah di Indonesia: absensi, jurnal mengajar, rapor, PPDB, perpustakaan, dan ujian online, lengkap dengan source code dan panduan instalasi.">
+    <meta name="keywords" content="aplikasi sekolah, e-learning, sistem informasi sekolah, aplikasi pendidikan, LMS, raport digital, absensi digital, PPDB online">
+    <meta name="author" content="EduMarket">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="EduMarket - Marketplace Aplikasi Pendidikan Digital">
+    <meta property="og:description" content="Temukan berbagai aplikasi web berkualitas untuk kebutuhan sekolah dan pembelajaran digital Anda.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="">
+    <meta property="og:image" content="assets/images/og-image.png">
+
+    <title>EduMarket - Katalog Aplikasi Sekolah</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg" id="siteFavicon">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,500;0,600;0,700;1,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- AOS - Animate On Scroll -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    
+    <!-- SweetAlert2 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="assets/css/style.css?v=3.0">
+</head>
+<body>
+
+    <!-- ==================== PRELOADER ==================== -->
+    <div id="preloader">
+        <div class="preloader-inner">
+            <div class="preloader-logo" id="preloaderLogo">
+                <span class="logo-icon" id="preloaderLogoIcon"><i class="fas fa-graduation-cap"></i></span>
+                <img src="" alt="Logo" class="site-logo-img" id="preloaderLogoImg" style="display: none;">
+                <span class="logo-text" id="preloaderLogoText">Edu<span class="text-gradient">Market</span></span>
+            </div>
+            <p class="preloader-text">Memuat…</p>
+        </div>
+    </div>
+
+    <!-- Instant Preloader & Logo LocalStorage Hydration (Zero-Delay Paint) -->
+    <script>
+    (function(){
+        try {
+            var raw = localStorage.getItem('edumarket_store_profile');
+            if (raw) {
+                var d = JSON.parse(raw);
+                var prefix = d.name_prefix !== undefined ? d.name_prefix : '';
+                var suffix = d.name_suffix !== undefined ? d.name_suffix : '';
+                var brandHtml = '';
+                if (prefix || suffix) {
+                    brandHtml = (prefix || '') + (suffix ? '<span class="text-gradient">' + suffix + '</span>' : '');
+                } else if (d.store_name) {
+                    brandHtml = d.store_name;
+                }
+
+                if (brandHtml) {
+                    var pt = document.getElementById('preloaderLogoText');
+                    if (pt) pt.innerHTML = brandHtml;
+                }
+
+                if (d.logo && !d.logo.endsWith('favicon.svg')) {
+                    var pi = document.getElementById('preloaderLogoImg');
+                    var pic = document.getElementById('preloaderLogoIcon');
+                    if (pi && pic) {
+                        pi.src = d.logo;
+                        pi.style.display = 'inline-block';
+                        pic.style.display = 'none';
+                    }
+                }
+            }
+        } catch(e){}
+    })();
+    </script>
+
+    <!-- ==================== NAVIGATION ==================== -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <a href="#" class="nav-logo" id="mainNavLogo">
+                <span class="logo-icon" id="mainNavLogoIcon"><i class="fas fa-graduation-cap"></i></span>
+                <img src="" alt="Logo" class="site-logo-img" id="mainNavLogoImg" style="display: none;">
+                <span class="logo-text" id="mainNavLogoText">Edu<span class="text-gradient">Market</span></span>
+            </a>
+
+            <ul class="nav-menu" id="navMenu">
+                <li class="nav-item">
+                    <a href="#hero" class="nav-link active">
+                        <i class="fas fa-home"></i> Beranda
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#features" class="nav-link">
+                        <i class="fas fa-star"></i> Fitur
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#products" class="nav-link">
+                        <i class="fas fa-box-open"></i> Produk
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#testimonials" class="nav-link">
+                        <i class="fas fa-comments"></i> Testimoni
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#faq" class="nav-link">
+                        <i class="fas fa-question-circle"></i> FAQ
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#contact" class="nav-link">
+                        <i class="fas fa-envelope"></i> Kontak
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="admin/login.php" class="nav-link nav-admin-mobile-link">
+                        <i class="fas fa-user-shield"></i> Portal Admin
+                    </a>
+                </li>
+                <li class="nav-item nav-cta-mobile">
+                    <a href="#products" class="btn btn-primary btn-sm">
+                        <i class="fas fa-shopping-cart"></i> Beli Sekarang
+                    </a>
+                </li>
+                <!-- Dark Mode Toggle (Mobile) -->
+                <li class="nav-item dark-mode-mobile">
+                    <button class="dark-mode-toggle" id="darkModeToggleMobile" aria-label="Toggle Dark Mode">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                </li>
+            </ul>
+
+            <div class="nav-actions">
+                <!-- Admin Login Button -->
+                <a href="admin/login.php" class="btn btn-sm nav-admin-btn" title="Login ke Dashboard Manajemen Konten">
+                    <i class="fas fa-lock"></i> <span>Admin</span>
+                </a>
+                <!-- Dark Mode Toggle -->
+                <button class="dark-mode-toggle" id="darkModeToggle" aria-label="Toggle Dark Mode">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <!-- CTA Button -->
+                <a href="#products" class="btn btn-primary btn-sm nav-cta">
+                    <i class="fas fa-shopping-cart"></i> Beli Sekarang
+                </a>
+                <!-- Hamburger Menu -->
+                <button class="hamburger" id="hamburger" aria-label="Toggle Menu">
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ==================== HERO SECTION ==================== -->
+    <section id="hero" class="hero-section">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <p class="hero-eyebrow">Katalog aplikasi sekolah &middot; Dibuat untuk sekolah di Indonesia</p>
+                    <h1 class="hero-title">
+                        Aplikasi sekolah yang <em>langsung</em> bisa dipakai.
+                    </h1>
+                    <p class="hero-subtitle">Satu katalog untuk kebutuhan harian sekolah: absensi, jurnal mengajar, rapor, PPDB, perpustakaan, dan ujian online.</p>
+                    <p class="hero-description">
+                        Setiap aplikasi dijual lengkap dengan source code, panduan instalasi, dan update.
+                        Anda terima file dan panduannya, lalu pasang di server sekolah.
+                    </p>
+                    <div class="hero-cta">
+                        <a href="#products" class="btn btn-primary btn-lg">Lihat katalog</a>
+                        <a href="#why-us" class="btn btn-outline btn-lg">Cara pembelian</a>
+                    </div>
+                    <ol class="hero-steps">
+                        <li><span class="hero-step-num">1</span> Pilih aplikasi</li>
+                        <li><span class="hero-step-num">2</span> Bayar via QRIS, transfer, atau e-wallet</li>
+                        <li><span class="hero-step-num">3</span> Terima file &amp; panduan lewat WhatsApp</li>
+                    </ol>
+                </div>
+
+                <div class="hero-visual">
+                    <div class="hero-illustration">
+                        <div class="dashboard-mockup">
+                            <div class="mockup-header">
+                                <div class="mockup-dots">
+                                    <span class="dot dot-red"></span>
+                                    <span class="dot dot-yellow"></span>
+                                    <span class="dot dot-green"></span>
+                                </div>
+                                <div class="mockup-title">EduSchool Pro - Dashboard</div>
+                            </div>
+                            <div class="mockup-body">
+                                <div class="mockup-sidebar">
+                                    <div class="sidebar-item active"><i class="fas fa-home"></i></div>
+                                    <div class="sidebar-item"><i class="fas fa-users"></i></div>
+                                    <div class="sidebar-item"><i class="fas fa-book"></i></div>
+                                    <div class="sidebar-item"><i class="fas fa-chart-bar"></i></div>
+                                    <div class="sidebar-item"><i class="fas fa-cog"></i></div>
+                                </div>
+                                <div class="mockup-content">
+                                    <div class="mockup-stat-row">
+                                        <div class="mini-stat">
+                                            <i class="fas fa-user-graduate"></i>
+                                            <span>1.250</span>
+                                            <small>Siswa</small>
+                                        </div>
+                                        <div class="mini-stat">
+                                            <i class="fas fa-chalkboard-teacher"></i>
+                                            <span>85</span>
+                                            <small>Guru</small>
+                                        </div>
+                                        <div class="mini-stat">
+                                            <i class="fas fa-book-open"></i>
+                                            <span>42</span>
+                                            <small>Kelas</small>
+                                        </div>
+                                    </div>
+                                    <div class="mockup-chart">
+                                        <div class="chart-bar" style="height: 60%"></div>
+                                        <div class="chart-bar" style="height: 80%"></div>
+                                        <div class="chart-bar" style="height: 45%"></div>
+                                        <div class="chart-bar" style="height: 90%"></div>
+                                        <div class="chart-bar" style="height: 70%"></div>
+                                        <div class="chart-bar" style="height: 55%"></div>
+                                        <div class="chart-bar" style="height: 85%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== TRUSTED BY SECTION ==================== -->
+    <section class="trusted-section" id="trusted">
+        <div class="container">
+            <p class="trusted-line">Untuk kebutuhan harian sekolah: absensi &middot; jurnal mengajar &middot; rapor &middot; PPDB &middot; perpustakaan &middot; ujian online</p>
+        </div>
+    </section>
+
+    <!-- ==================== FEATURES SECTION ==================== -->
+    <section id="features" class="features-section section-padding">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-label">01 &mdash; Keunggulan</span>
+                <h2 class="section-title">Mengapa Memilih <span class="text-gradient">EduMarket?</span></h2>
+                <p class="section-subtitle">Aplikasi yang kami jual dipilih untuk kebutuhan harian sekolah, dari absensi sampai rapor.</p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="0">
+                    <div class="feature-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3 class="feature-title">Source Code Lengkap</h3>
+                    <p class="feature-description">Dapatkan source code lengkap yang bersih, terstruktur, dan mudah dikembangkan sesuai kebutuhan Anda.</p>
+                </div>
+
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="feature-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3 class="feature-title">Responsif & Modern</h3>
+                    <p class="feature-description">Semua aplikasi tampil rapi di desktop maupun ponsel, tanpa perlu aplikasi tambahan.</p>
+                </div>
+
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="feature-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3 class="feature-title">Support 24/7</h3>
+                    <p class="feature-description">Tim support kami siap membantu lewat WhatsApp dan email pada jam kerja.</p>
+                </div>
+
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="feature-icon">
+                        <i class="fas fa-sync-alt"></i>
+                    </div>
+                    <h3 class="feature-title">Update Gratis</h3>
+                    <p class="feature-description">Nikmati update fitur dan keamanan gratis selama 1 tahun untuk setiap produk yang Anda beli.</p>
+                </div>
+
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="400">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3 class="feature-title">Garansi 30 Hari</h3>
+                    <p class="feature-description">Garansi uang kembali 30 hari jika produk tidak sesuai deskripsi.</p>
+                </div>
+
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="500">
+                    <div class="feature-icon">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <h3 class="feature-title">Dokumentasi Lengkap</h3>
+                    <p class="feature-description">Setiap produk dilengkapi dokumentasi lengkap dan video tutorial instalasi yang mudah diikuti.</p>
+                </div>
+
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="600">
+                    <div class="feature-icon">
+                        <i class="fas fa-plug"></i>
+                    </div>
+                    <h3 class="feature-title">Mudah Integrasi</h3>
+                    <p class="feature-description">Aplikasi kami dirancang modular sehingga mudah diintegrasikan dengan sistem yang sudah Anda miliki.</p>
+                </div>
+
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="700">
+                    <div class="feature-icon">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <h3 class="feature-title">Layanan Kustomisasi</h3>
+                    <p class="feature-description">Butuh fitur khusus? Kami menyediakan layanan kustomisasi untuk menyesuaikan aplikasi dengan kebutuhan Anda.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== PRODUCTS SECTION ==================== -->
+    <section id="products" class="products-section section-padding">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-label">02 &mdash; Katalog</span>
+                <h2 class="section-title">Koleksi Aplikasi <span class="text-gradient">Pendidikan Digital</span></h2>
+                <p class="section-subtitle">Pilih berdasarkan kebutuhan sekolah Anda, lalu lihat detail dan demonya.</p>
+            </div>
+
+            <!-- Product Filters -->
+            <div class="product-filters" data-aos="fade-up" data-aos-delay="100">
+                <div class="filter-tabs">
+                    <button class="filter-tab active" data-category="all">
+                        <i class="fas fa-th-large"></i> Semua
+                    </button>
+                    <button class="filter-tab" data-category="aplikasi-sekolah">
+                        <i class="fas fa-school"></i> Aplikasi Sekolah
+                    </button>
+                    <button class="filter-tab" data-category="e-learning">
+                        <i class="fas fa-laptop"></i> E-Learning
+                    </button>
+                    <button class="filter-tab" data-category="sistem-informasi">
+                        <i class="fas fa-database"></i> Sistem Informasi
+                    </button>
+                    <button class="filter-tab" data-category="aplikasi-pembelajaran">
+                        <i class="fas fa-brain"></i> Pembelajaran
+                    </button>
+                </div>
+
+                <div class="filter-actions">
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="productSearch" placeholder="Cari produk..." class="search-input">
+                    </div>
+                    <div class="sort-select">
+                        <select id="productSort" class="sort-dropdown">
+                            <option value="featured">Paling banyak dibeli</option>
+                            <option value="newest">Terbaru</option>
+                            <option value="price-low">Harga terendah</option>
+                            <option value="price-high">Harga tertinggi</option>
+                            <option value="rating">Rating tertinggi</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Products Grid -->
+            <div class="products-grid" id="productsGrid">
+                <!-- Products will be loaded dynamically via JavaScript -->
+                <!-- Loading skeleton placeholders -->
+                <div class="product-card skeleton-card">
+                    <div class="skeleton skeleton-image"></div>
+                    <div class="skeleton-content">
+                        <div class="skeleton skeleton-text" style="width: 60%"></div>
+                        <div class="skeleton skeleton-text" style="width: 90%"></div>
+                        <div class="skeleton skeleton-text" style="width: 40%"></div>
+                    </div>
+                </div>
+                <div class="product-card skeleton-card">
+                    <div class="skeleton skeleton-image"></div>
+                    <div class="skeleton-content">
+                        <div class="skeleton skeleton-text" style="width: 60%"></div>
+                        <div class="skeleton skeleton-text" style="width: 90%"></div>
+                        <div class="skeleton skeleton-text" style="width: 40%"></div>
+                    </div>
+                </div>
+                <div class="product-card skeleton-card">
+                    <div class="skeleton skeleton-image"></div>
+                    <div class="skeleton-content">
+                        <div class="skeleton skeleton-text" style="width: 60%"></div>
+                        <div class="skeleton skeleton-text" style="width: 90%"></div>
+                        <div class="skeleton skeleton-text" style="width: 40%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Load More Button -->
+            <div class="load-more-container" data-aos="fade-up" id="loadMoreContainer" style="display: none;">
+                <button class="btn btn-outline btn-lg" id="loadMoreBtn">
+                    <i class="fas fa-plus-circle"></i> Muat Lebih Banyak
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== STATS SECTION ==================== -->
+    <section class="stats-section" id="stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stats-item" data-aos="fade-up" data-aos-delay="0">
+                    <div class="stats-number" data-target="50">0</div>
+                    <div class="stats-suffix">+</div>
+                    <div class="stats-label">Produk Digital</div>
+                </div>
+                <div class="stats-item" data-aos="fade-up" data-aos-delay="100">
+                    <div class="stats-number" data-target="2500">0</div>
+                    <div class="stats-suffix">+</div>
+                    <div class="stats-label">Pelanggan Puas</div>
+                </div>
+                <div class="stats-item" data-aos="fade-up" data-aos-delay="200">
+                    <div class="stats-number" data-target="4800">0</div>
+                    <div class="stats-suffix">+</div>
+                    <div class="stats-label">Review Bintang 5</div>
+                </div>
+                <div class="stats-item" data-aos="fade-up" data-aos-delay="300">
+                    <div class="stats-number" data-target="8">0</div>
+                    <div class="stats-suffix">+</div>
+                    <div class="stats-label">Tahun Pengalaman</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== WHY CHOOSE US SECTION ==================== -->
+    <section class="why-section section-padding" id="why-us">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-label">03 &mdash; Paket</span>
+                <h2 class="section-title">Pilih paket sesuai kebutuhan sekolah</h2>
+                <p class="section-subtitle">Tiga pilihan isi paket untuk satu pembelian aplikasi.</p>
+            </div>
+
+            <div class="pricing-grid">
+                <div class="pricing-card" data-aos="fade-up" data-aos-delay="0">
+                    <div class="pricing-header">
+                        <div class="pricing-icon"><i class="fas fa-seedling"></i></div>
+                        <h3 class="pricing-title">Starter</h3>
+                        <p class="pricing-desc">Untuk kebutuhan dasar</p>
+                    </div>
+                    <div class="pricing-features">
+                        <ul>
+                            <li><i class="fas fa-check"></i> Source Code Lengkap</li>
+                            <li><i class="fas fa-check"></i> Dokumentasi Dasar</li>
+                            <li><i class="fas fa-check"></i> Instalasi Panduan PDF</li>
+                            <li><i class="fas fa-check"></i> Update 6 Bulan</li>
+                            <li><i class="fas fa-check"></i> Support via Email</li>
+                            <li class="disabled"><i class="fas fa-times"></i> Video Tutorial</li>
+                            <li class="disabled"><i class="fas fa-times"></i> Kustomisasi</li>
+                            <li class="disabled"><i class="fas fa-times"></i> Priority Support</li>
+                        </ul>
+                    </div>
+                    <div class="pricing-footer">
+                        <a href="#products" class="btn btn-outline">Pilih Paket</a>
+                    </div>
+                </div>
+
+                <div class="pricing-card featured" data-aos="fade-up" data-aos-delay="100">
+                    <div class="pricing-badge">Paling banyak dipilih</div>
+                    <div class="pricing-header">
+                        <div class="pricing-icon"><i class="fas fa-rocket"></i></div>
+                        <h3 class="pricing-title">Professional</h3>
+                        <p class="pricing-desc">Untuk sekolah yang butuh pendampingan instalasi</p>
+                    </div>
+                    <div class="pricing-features">
+                        <ul>
+                            <li><i class="fas fa-check"></i> Source Code Lengkap</li>
+                            <li><i class="fas fa-check"></i> Dokumentasi Lengkap</li>
+                            <li><i class="fas fa-check"></i> Video Tutorial Instalasi</li>
+                            <li><i class="fas fa-check"></i> Update 1 Tahun</li>
+                            <li><i class="fas fa-check"></i> Support WhatsApp 24/7</li>
+                            <li><i class="fas fa-check"></i> Bantuan Instalasi</li>
+                            <li><i class="fas fa-check"></i> Minor Kustomisasi</li>
+                            <li class="disabled"><i class="fas fa-times"></i> Full Kustomisasi</li>
+                        </ul>
+                    </div>
+                    <div class="pricing-footer">
+                        <a href="#products" class="btn btn-primary">Pilih Paket</a>
+                    </div>
+                </div>
+
+                <div class="pricing-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="pricing-header">
+                        <div class="pricing-icon"><i class="fas fa-crown"></i></div>
+                        <h3 class="pricing-title">Enterprise</h3>
+                        <p class="pricing-desc">Solusi lengkap & kustomisasi</p>
+                    </div>
+                    <div class="pricing-features">
+                        <ul>
+                            <li><i class="fas fa-check"></i> Source Code Lengkap</li>
+                            <li><i class="fas fa-check"></i> Dokumentasi Lengkap</li>
+                            <li><i class="fas fa-check"></i> Video Tutorial Lengkap</li>
+                            <li><i class="fas fa-check"></i> Update Selamanya</li>
+                            <li><i class="fas fa-check"></i> Priority Support 24/7</li>
+                            <li><i class="fas fa-check"></i> Full Instalasi</li>
+                            <li><i class="fas fa-check"></i> Full Kustomisasi</li>
+                            <li><i class="fas fa-check"></i> Konsultasi Gratis</li>
+                        </ul>
+                    </div>
+                    <div class="pricing-footer">
+                        <a href="#contact" class="btn btn-outline">Hubungi Kami</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== TESTIMONIALS SECTION ==================== -->
+    <section id="testimonials" class="testimonials-section section-padding">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-label">04 &mdash; Testimoni</span>
+                <h2 class="section-title">Apa Kata <span class="text-gradient">Pelanggan Kami?</span></h2>
+                <p class="section-subtitle">Cerita dari sekolah yang sudah memakai aplikasi dari katalog ini.</p>
+            </div>
+
+            <div class="testimonials-wrapper" data-aos="fade-up" data-aos-delay="100">
+                <div class="testimonials-slider" id="testimonialsSlider">
+                    <!-- Testimonials will be loaded dynamically -->
+                </div>
+                
+                <!-- Slider Controls -->
+                <div class="slider-controls">
+                    <button class="slider-btn slider-prev" id="testimonialPrev">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <div class="slider-dots" id="testimonialDots"></div>
+                    <button class="slider-btn slider-next" id="testimonialNext">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== FAQ SECTION ==================== -->
+    <section id="faq" class="faq-section section-padding">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-label">05 &mdash; Tanya jawab</span>
+                <h2 class="section-title">Pertanyaan yang <span class="text-gradient">Sering Diajukan</span></h2>
+                <p class="section-subtitle">Jawaban singkat untuk hal yang paling sering ditanyakan sebelum membeli.</p>
+            </div>
+
+            <div class="faq-container" data-aos="fade-up" data-aos-delay="100">
+                <div class="faq-list" id="faqList">
+                    <!-- FAQ items will be loaded dynamically via JavaScript -->
+                </div>
+            </div>
+
+            <div class="faq-cta" data-aos="fade-up" data-aos-delay="200">
+                <p>Masih punya pertanyaan lain?</p>
+                <a href="#contact" class="btn btn-primary">
+                    <i class="fas fa-paper-plane"></i> Hubungi Kami
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== NEWSLETTER SECTION ==================== -->
+    <section class="newsletter-section" id="newsletter">
+        <div class="container">
+            <div class="newsletter-content" data-aos="fade-up">
+                <div class="newsletter-text">
+                    <h2><i class="fas fa-envelope-open-text"></i> Dapatkan Update Terbaru</h2>
+                    <p>Berlangganan newsletter kami untuk mendapatkan info produk baru, diskon eksklusif, dan tips edutech terkini.</p>
+                </div>
+                <form class="newsletter-form" id="newsletterForm">
+                    <div class="newsletter-input-group">
+                        <input type="email" placeholder="Masukkan alamat email Anda..." class="newsletter-input" id="newsletterEmail" required>
+                        <button type="submit" class="btn btn-primary newsletter-btn">
+                            <i class="fas fa-paper-plane"></i>
+                            <span>Berlangganan</span>
+                        </button>
+                    </div>
+                    <p class="newsletter-note"><i class="fas fa-lock"></i> Kami tidak akan pernah mengirim spam. Berhenti berlangganan kapan saja.</p>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== CONTACT SECTION ==================== -->
+    <section id="contact" class="contact-section section-padding">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-label">06 &mdash; Kontak</span>
+                <h2 class="section-title">Hubungi <span class="text-gradient">Tim Kami</span></h2>
+                <p class="section-subtitle">Silakan hubungi kami lewat formulir atau kontak di bawah ini.</p>
+            </div>
+
+            <div class="contact-grid">
+                <!-- Contact Info -->
+                <div class="contact-info" data-aos="fade-right">
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-detail">
+                            <h4>Email</h4>
+                            <p>support@edumarket.id</p>
+                            <p>sales@edumarket.id</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fab fa-whatsapp"></i>
+                        </div>
+                        <div class="contact-detail">
+                            <h4>WhatsApp</h4>
+                            <p>+62 812-3456-7890</p>
+                            <p>+62 878-9012-3456</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-detail">
+                            <h4>Lokasi</h4>
+                            <p>Jl. Teknologi No. 123</p>
+                            <p>Jakarta Selatan, Indonesia</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="contact-detail">
+                            <h4>Jam Operasional</h4>
+                            <p>Senin - Jumat: 08.00 - 17.00</p>
+                            <p>Sabtu: 09.00 - 14.00</p>
+                        </div>
+                    </div>
+
+                    <!-- Social Media Links -->
+                    <div class="contact-social">
+                        <h4>Ikuti Kami</h4>
+                        <div class="social-links">
+                            <a href="#" class="social-link" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="social-link" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                            <a href="#" class="social-link" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="social-link" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                            <a href="#" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" class="social-link" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <div class="contact-form-wrapper" data-aos="fade-left">
+                    <form class="contact-form" id="contactForm">
+                        <div class="form-group">
+                            <div class="input-wrapper">
+                                <input type="text" id="contactName" name="name" required placeholder=" ">
+                                <label for="contactName"><i class="fas fa-user"></i> Nama Lengkap</label>
+                                <span class="input-border"></span>
+                            </div>
+                            <span class="error-message" id="nameError"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="input-wrapper">
+                                <input type="email" id="contactEmail" name="email" required placeholder=" ">
+                                <label for="contactEmail"><i class="fas fa-envelope"></i> Email</label>
+                                <span class="input-border"></span>
+                            </div>
+                            <span class="error-message" id="emailError"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="input-wrapper">
+                                <input type="text" id="contactSubject" name="subject" required placeholder=" ">
+                                <label for="contactSubject"><i class="fas fa-tag"></i> Subjek</label>
+                                <span class="input-border"></span>
+                            </div>
+                            <span class="error-message" id="subjectError"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="input-wrapper textarea-wrapper">
+                                <textarea id="contactMessage" name="message" rows="5" required placeholder=" "></textarea>
+                                <label for="contactMessage"><i class="fas fa-comment-alt"></i> Pesan</label>
+                                <span class="input-border"></span>
+                            </div>
+                            <span class="error-message" id="messageError"></span>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-lg btn-block" id="contactSubmitBtn">
+                            <span class="btn-text"><i class="fas fa-paper-plane"></i> Kirim Pesan</span>
+                            <span class="btn-loading" style="display: none;">
+                                <i class="fas fa-spinner fa-spin"></i> Mengirim...
+                            </span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="footer" id="footer">
+        <div class="footer-top">
+            <div class="container">
+                <div class="footer-grid">
+                    <!-- About -->
+                    <div class="footer-col" data-aos="fade-up" data-aos-delay="0">
+                        <a href="#" class="footer-logo" id="footerLogo">
+                            <span class="logo-icon" id="footerLogoIcon"><i class="fas fa-graduation-cap"></i></span>
+                            <img src="" alt="Logo" class="site-logo-img" id="footerLogoImg" style="display: none;">
+                            <span class="logo-text" id="footerLogoText">Edu<span class="text-gradient">Market</span></span>
+                        </a>
+                        <p class="footer-about">
+                            EduMarket adalah katalog aplikasi pendidikan digital untuk sekolah di Indonesia. Setiap produk dilengkapi source code dan panduan instalasi.
+                        </p>
+                        <div class="footer-social">
+                            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                            <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- Quick Links -->
+                    <div class="footer-col" data-aos="fade-up" data-aos-delay="100">
+                        <h4 class="footer-title">Tautan Cepat</h4>
+                        <ul class="footer-links">
+                            <li><a href="#hero"><i class="fas fa-chevron-right"></i> Beranda</a></li>
+                            <li><a href="#features"><i class="fas fa-chevron-right"></i> Fitur</a></li>
+                            <li><a href="#products"><i class="fas fa-chevron-right"></i> Produk</a></li>
+                            <li><a href="#testimonials"><i class="fas fa-chevron-right"></i> Testimoni</a></li>
+                            <li><a href="#faq"><i class="fas fa-chevron-right"></i> FAQ</a></li>
+                            <li><a href="#contact"><i class="fas fa-chevron-right"></i> Kontak</a></li>
+                            <li><a href="admin/login.php"><i class="fas fa-user-shield"></i> Login Admin</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Products -->
+                    <div class="footer-col" data-aos="fade-up" data-aos-delay="200">
+                        <h4 class="footer-title">Produk Unggulan</h4>
+                        <ul class="footer-links">
+                            <li><a href="#"><i class="fas fa-chevron-right"></i> EduSchool Pro</a></li>
+                            <li><a href="#"><i class="fas fa-chevron-right"></i> SmartLearn LMS</a></li>
+                            <li><a href="#"><i class="fas fa-chevron-right"></i> AbsensiKu Digital</a></li>
+                            <li><a href="#"><i class="fas fa-chevron-right"></i> RaporDigital</a></li>
+                            <li><a href="#"><i class="fas fa-chevron-right"></i> QuizMaster Pro</a></li>
+                            <li><a href="#"><i class="fas fa-chevron-right"></i> PPDB Online</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Contact Info -->
+                    <div class="footer-col" data-aos="fade-up" data-aos-delay="300">
+                        <h4 class="footer-title">Hubungi Kami</h4>
+                        <ul class="footer-contact">
+                            <li>
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Jl. Teknologi No. 123<br>Jakarta Selatan, Indonesia</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-envelope"></i>
+                                <span>support@edumarket.id</span>
+                            </li>
+                            <li>
+                                <i class="fab fa-whatsapp"></i>
+                                <span>+62 812-3456-7890</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-clock"></i>
+                                <span>Senin - Jumat: 08.00 - 17.00</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer Bottom -->
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="footer-bottom-content">
+                    <p class="copyright">
+                        &copy; 2026 EduAdminSP. Manage With <i class="fas fa-heart" style="color: #D97706;"></i> by adangsp
+                    </p>
+                    <div class="payment-methods">
+                        <span>Metode Pembayaran:</span>
+                        <div class="payment-icons">
+                            <i class="fas fa-university" title="Transfer Bank"></i>
+                            <i class="fas fa-wallet" title="E-Wallet"></i>
+                            <i class="fas fa-qrcode" title="QRIS"></i>
+                            <i class="fab fa-cc-visa" title="Visa"></i>
+                            <i class="fab fa-cc-mastercard" title="Mastercard"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ==================== BACK TO TOP BUTTON ==================== -->
+    <button class="back-to-top" id="backToTop" aria-label="Kembali ke Atas">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- ==================== PRODUCT DETAIL MODAL ==================== -->
+    <div class="modal-overlay" id="productModal">
+        <div class="modal-container">
+            <button class="modal-close" id="modalClose">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="modal-body" id="modalBody">
+                <!-- Content loaded dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== TOAST CONTAINER ==================== -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- ==================== SCRIPTS ==================== -->
+    <!-- AOS Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
+    <!-- Main JavaScript -->
+    <script src="assets/js/app.js?v=3.0"></script>
+
+</body>
+</html>
